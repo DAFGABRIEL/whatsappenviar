@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Notificação de Pedido Pronto</title>
+</head>
+<body>
+    <h2>Notificação de Pedido Pronto</h2>
+    
+    <form id="orderForm">
+        <label>Escolha a Loja:</label><br>
+        <input type="radio" id="empresarial" name="loja" value="558184605489" required>
+        <label for="empresarial">Empresarial</label><br>
+        
+        <input type="radio" id="avenida" name="loja" value="558196880413">
+        <label for="avenida">Avenida</label><br>
+        
+        <input type="radio" id="trade" name="loja" value="558198443223">
+        <label for="trade">Trade Center</label><br><br>
+
+        <input type="radio" id="santacruz" name="loja" value="558196880374">
+        <label for="santacruz">Caruaru Santa Cruz</label><br><br>
+
+        <input type="radio" id="comercial" name="loja" value="558196880394">
+        <label for="comercial">Arcoverde Santa Cruz</label><br><br>
+
+        <input type="radio" id="caruaru" name="loja" value="558181742396">
+        <label for="caruaru">Caruaru Matriz</label><br><br>
+
+        <input type="radio" id="stilus" name="loja" value="558198443223">
+        <label for="stilus">Stilus</label><br><br>
+        
+        <label for="vendedor">Nome do Vendedor:</label>
+        <input type="text" id="vendedor" required>
+        <br><br>
+
+        <label for="cliente">Nome do Cliente:</label>
+        <input type="text" id="cliente" required>
+        <br><br>
+
+        <label for="os">Ordem de Serviço:</label>
+        <input type="text" id="os" required>
+        <br><br>
+
+        <button type="button" onclick="enviarWhatsApp()">Enviar</button>
+    </form>
+
+    <script>
+        function enviarWhatsApp() {
+            const loja = document.querySelector('input[name="loja"]:checked');
+            const vendedor = document.getElementById("vendedor").value;
+            const cliente = document.getElementById("cliente").value;
+            const os = document.getElementById("os").value;
+
+            if (!loja || !vendedor || !cliente || !os) {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            const mensagem = `${vendedor}, o serviço de ${cliente} ${os} está pronto, pode mandar a armação.`;
+            const url = `https://wa.me/${loja.value}?text=${encodeURIComponent(mensagem)}`;
+
+            window.open(url, "_blank");
+        }
+    </script>
+</body>
+</html>
